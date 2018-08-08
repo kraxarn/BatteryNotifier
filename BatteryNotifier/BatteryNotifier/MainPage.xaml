@@ -1,14 +1,95 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:BatteryNotifier"
-             x:Class="BatteryNotifier.MainPage">
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:BatteryNotifier"
+	x:Class="BatteryNotifier.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-    	<Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+	<StackLayout
+		Margin="32">
+		
+		<Label
+			x:Name="LabelTitle"
+			FontAttributes="Bold"
+			FontSize="38"
+			HorizontalTextAlignment="Center"
+			Margin="0,64,0,0"
+			Text="-%"/>
+
+		<Label
+			x:Name="LabelStatus"
+			HorizontalTextAlignment="Center"
+			Text="Unknown"/>
+
+		<Frame
+			x:Name="FrameControls"
+			VerticalOptions="EndAndExpand"
+			HasShadow="False"
+			Margin="0,0,0,64">
+			
+			<StackLayout>
+
+				<StackLayout
+					Orientation="Horizontal">
+
+					<Label
+						Text="Low battery"
+						VerticalTextAlignment="Center"/>
+					
+					<Switch
+						HorizontalOptions="EndAndExpand"/>
+					
+				</StackLayout>
+
+				<StackLayout
+					Orientation="Horizontal">
+					
+					<Slider
+						x:Name="SliderLowPercent"
+						Minimum="0"
+						Maximum="20"
+						HorizontalOptions="FillAndExpand"/>
+					
+					<Label
+						x:Name="LabelLowPercent"
+						VerticalTextAlignment="Center"
+						Text="---%"/>
+
+				</StackLayout>
+
+				<StackLayout
+					Orientation="Horizontal"
+					Margin="0,32,0,0">
+
+					<Label
+						Text="High battery"
+						VerticalTextAlignment="Center"/>
+
+					<Switch
+						HorizontalOptions="EndAndExpand"/>
+
+				</StackLayout>
+
+				<StackLayout
+					Orientation="Horizontal">
+
+					<Slider
+						x:Name="SliderHighPercent"
+						Minimum="0"
+						Maximum="20"
+						HorizontalOptions="FillAndExpand"/>
+
+					<Label
+						x:Name="LabelHighPercent"
+						VerticalTextAlignment="Center"
+						Text="---%"/>
+
+				</StackLayout>
+
+			</StackLayout>
+
+		</Frame>
+
+	</StackLayout>
 
 </ContentPage>
