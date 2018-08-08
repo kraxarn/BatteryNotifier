@@ -1,4 +1,5 @@
-﻿using BatteryNotifier.iOS;
+﻿using System.Diagnostics;
+using BatteryNotifier.iOS;
 using Xamarin.Forms;
 
 namespace BatteryNotifier
@@ -40,12 +41,38 @@ namespace BatteryNotifier
 			LabelTitle.Text = $"{battery.Level}%";
 			LabelStatus.Text = battery.IsCharging ? "Charging" : "Not charging";
 
+			// Set default settings
+			var lowEnabled  = Preferences.Get("lowEnabled",  true);
+			var highEnabled = Preferences.Get("highEnabled", true);
+
+			var lowValue  = Preferences.Get("lowValue",  50);
+			var highValue = Preferences.Get("highValue", 60);
+
+			SwitchLow.IsToggled  = lowEnabled;
+			SwitchHigh.IsToggled = highEnabled;
+
+			SliderLowPercent.Value  = lowValue  / 5f;
+			SliderHighPercent.Value = highValue / 5f;
+
+			LabelLowPercent.Text  = $"{lowValue}%";
+			LabelHighPercent.Text = $"{highValue}%";
+
 			// Set backgrond color depending on battery level
 			BackgroundColor = BatteryColor;
 
 			// Update labels depending on setting sliders
-			SliderLowPercent.ValueChanged  += (sender, args) => { LabelLowPercent.Text  = $"{(int) args.NewValue * 5}%"; };
-			SliderHighPercent.ValueChanged += (sender, args) => { LabelHighPercent.Text = $"{(int) args.NewValue * 5}%"; };
+			SliderLowPercent.ValueChanged  += (sender, args) =>
+			{
+				var p = (int) args.NewValue * 5;
+				LabelLowPercent.Text  = $"{p}%";
+				Preferences.Set("lowValue", p);
+			};
+			SliderHighPercent.ValueChanged += (sender, args) =>
+			{
+				var p = (int) args.NewValue * 5;
+				LabelHighPercent.Text = $"{p}%";
+				Preferences.Set("highValue", p);
+			};
 		}
 	}
 }

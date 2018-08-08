@@ -37,6 +37,7 @@
 						VerticalTextAlignment="Center"/>
 					
 					<Switch
+						x:Name="SwitchLow"
 						HorizontalOptions="EndAndExpand"/>
 					
 				</StackLayout>
@@ -66,6 +67,7 @@
 						VerticalTextAlignment="Center"/>
 
 					<Switch
+						x:Name="SwitchHigh"
 						HorizontalOptions="EndAndExpand"/>
 
 				</StackLayout>
