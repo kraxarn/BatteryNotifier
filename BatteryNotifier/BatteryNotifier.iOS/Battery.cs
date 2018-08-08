@@ -9,7 +9,15 @@ namespace BatteryNotifier.iOS
 		private NSObject levelObserver;
 		private NSObject stateObserver;
 
-		public int Level => (int) (UIDevice.CurrentDevice.BatteryLevel * 100);
+		public delegate void BatteryChargingEvent(bool charging);
+
+		public delegate void BatteryLevelEvent(int level);
+
+		public BatteryChargingEvent OnCharging;
+
+		public BatteryLevelEvent OnLevel;
+
+		public int Level => (int)(UIDevice.CurrentDevice.BatteryLevel * 100);
 
 		public bool IsCharging
 		{
@@ -42,6 +50,7 @@ namespace BatteryNotifier.iOS
 		{
 			UIDevice.CurrentDevice.BatteryMonitoringEnabled = false;
 
+
 			levelObserver?.Dispose();
 			levelObserver = null;
 
@@ -49,14 +58,8 @@ namespace BatteryNotifier.iOS
 			stateObserver = null;
 		}
 
-		private void BatteryStateChanged(object sender, NSNotificationEventArgs e)
-		{
-			// TODO
-		}
+		private void BatteryStateChanged(object sender, NSNotificationEventArgs e) => OnCharging?.Invoke(IsCharging);
 
-		private void BatteryLevelChanged(object sender, NSNotificationEventArgs e)
-		{
-			// TODO
-		}
+		private void BatteryLevelChanged(object sender, NSNotificationEventArgs e) => OnLevel?.Invoke(Level);
 	}
 }
