@@ -7,20 +7,6 @@ namespace BatteryNotifier
 {
 	public partial class MainPage
 	{
-		private Color BatteryColor
-		{
-			get
-			{
-				if (battery.Level >= 50 && battery.Level <= 60)
-					return Tools.Green;
-
-				if (battery.Level >= 25 && battery.Level <= 80)
-					return Tools.Yellow;
-
-				return Tools.Red;
-			}
-		}
-
 		private readonly Battery battery;
 
 		public MainPage()
@@ -36,7 +22,7 @@ namespace BatteryNotifier
 			battery.OnLevel    += level    => UpdateBatteryImage();
 
 			// Set settings background color
-			FrameControls.BackgroundColor = Color.FromRgba(0.9, 0.9, 0.9, 0.95);
+			FrameControls.BackgroundColor = Color.FromRgba(0.9, 0.9, 0.9, 0.7);
 
 			// Set default settings
 			var lowEnabled  = Preferences.Get("lowEnabled",  true);
@@ -53,9 +39,6 @@ namespace BatteryNotifier
 
 			LabelLowPercent.Text  = $"{lowValue}%";
 			LabelHighPercent.Text = $"{highValue}%";
-
-			// Set backgrond color depending on battery level
-			BackgroundColor = BatteryColor;
 
 			// Set battery image
 			UpdateBatteryImage();
@@ -92,8 +75,6 @@ namespace BatteryNotifier
 			var charging = battery.IsCharging;
 
 			var fileName = $"{(charging ? "charging-" : "")}{level}.png";
-
-			Debug.WriteLine($"Loading image '{fileName}'");
 
 			ImageBattery.Source = ImageSource.FromFile($"images/{fileName}");
 		}

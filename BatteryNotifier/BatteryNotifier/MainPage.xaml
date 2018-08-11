@@ -3,7 +3,8 @@
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:local="clr-namespace:BatteryNotifier"
-	x:Class="BatteryNotifier.MainPage">
+	x:Class="BatteryNotifier.MainPage"
+	BackgroundColor="#263238">
 
 	<StackLayout
 		Margin="32">
