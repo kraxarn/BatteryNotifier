@@ -90,6 +90,9 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Battery.cs" />
     <Compile Include="Main.cs" />
@@ -101,47 +104,47 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
@@ -153,6 +156,69 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.561731" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\70.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\90.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-70.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-90.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\charging-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\unknown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\BatteryNotifier\BatteryNotifier.projitems" Label="Shared" />

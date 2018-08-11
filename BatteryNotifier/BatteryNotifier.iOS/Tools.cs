@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using Foundation;
+using UIKit;
+using Xamarin.Forms;
 
 namespace BatteryNotifier.iOS
 {
@@ -18,5 +20,24 @@ namespace BatteryNotifier.iOS
 		/// Bad battery (0-100% except 25-80%)
 		/// </summary>
 		public static Color Red = Color.FromHex("#e53935");
+
+		public static void ShowAlert(string title, string message)
+		{
+			void Show()
+			{
+				var alert = new UIAlertView
+				{
+					Title   = title,
+					Message = message
+				};
+				alert.AddButton("Ok");
+				alert.Show();
+			}
+
+			if (NSThread.Current.IsMainThread)
+				Show();
+			else
+				NSRunLoop.Main.BeginInvokeOnMainThread(Show);
+		}
 	}
 }

@@ -7,19 +7,20 @@
 
 	<StackLayout
 		Margin="32">
-		
-		<Label
-			x:Name="LabelTitle"
-			FontAttributes="Bold"
-			FontSize="38"
-			HorizontalTextAlignment="Center"
-			Margin="0,64,0,0"
-			Text="-%"/>
 
-		<Label
-			x:Name="LabelStatus"
-			HorizontalTextAlignment="Center"
-			Text="Unknown"/>
+		<StackLayout
+			Orientation="Horizontal"
+			WidthRequest="192"
+			HeightRequest="192">
+
+			<Image
+				HorizontalOptions="CenterAndExpand"
+				Margin="0,64,0,0"
+				Aspect="AspectFit"
+				x:Name="ImageBattery"/>
+			
+			</StackLayout>
+
 
 		<Frame
 			x:Name="FrameControls"

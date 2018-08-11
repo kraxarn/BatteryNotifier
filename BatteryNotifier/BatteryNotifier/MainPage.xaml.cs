@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using BatteryNotifier.iOS;
+using UserNotifications;
 using Xamarin.Forms;
 
 namespace BatteryNotifier
@@ -31,15 +32,11 @@ namespace BatteryNotifier
 			battery = new Battery();
 
 			// Subscribe to events
-			battery.OnCharging += charging => LabelStatus.Text = charging ? "Charging" : "Not charging";
-			battery.OnLevel    += level    => LabelTitle.Text  = $"{level}%";
+			battery.OnCharging += charging => UpdateBatteryImage();
+			battery.OnLevel    += level    => UpdateBatteryImage();
 
 			// Set settings background color
 			FrameControls.BackgroundColor = Color.FromRgba(0.9, 0.9, 0.9, 0.95);
-
-			// Set default labels
-			LabelTitle.Text = $"{battery.Level}%";
-			LabelStatus.Text = battery.IsCharging ? "Charging" : "Not charging";
 
 			// Set default settings
 			var lowEnabled  = Preferences.Get("lowEnabled",  true);
@@ -60,8 +57,11 @@ namespace BatteryNotifier
 			// Set backgrond color depending on battery level
 			BackgroundColor = BatteryColor;
 
+			// Set battery image
+			UpdateBatteryImage();
+
 			// Update labels depending on setting sliders
-			SliderLowPercent.ValueChanged  += (sender, args) =>
+			SliderLowPercent.ValueChanged += (sender, args) =>
 			{
 				var p = (int) args.NewValue * 5;
 				LabelLowPercent.Text  = $"{p}%";
@@ -73,6 +73,29 @@ namespace BatteryNotifier
 				LabelHighPercent.Text = $"{p}%";
 				Preferences.Set("highValue", p);
 			};
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, error) =>
+			{
+				if (!approved)
+					Tools.ShowAlert("Error", "Notifications are required for the app to work");
+			});
+		}
+
+		private void UpdateBatteryImage()
+		{
+			var level    = battery.Level / 10 * 10;
+			var charging = battery.IsCharging;
+
+			var fileName = $"{(charging ? "charging-" : "")}{level}.png";
+
+			Debug.WriteLine($"Loading image '{fileName}'");
+
+			ImageBattery.Source = ImageSource.FromFile($"images/{fileName}");
 		}
 	}
 }
