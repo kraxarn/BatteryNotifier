@@ -19,7 +19,7 @@ namespace BatteryNotifier
 
 			// Subscribe to events
 			battery.OnCharging += charging => UpdateBatteryImage();
-			battery.OnLevel    += level    => UpdateBatteryImage();
+			battery.OnLevel    += level    => UpdateBatteryStatus();
 
 			// Set settings background color
 			FrameControls.BackgroundColor = Color.FromRgba(0.9, 0.9, 0.9, 0.7);
@@ -67,6 +67,19 @@ namespace BatteryNotifier
 				if (!approved)
 					Tools.ShowAlert("Error", "Notifications are required for the app to work");
 			});
+		}
+
+		private void UpdateBatteryStatus()
+		{
+			// Check if charge is any set value
+			var level = battery.Level;
+
+			Debug.WriteLine($"UpdateBatteryStatus: {level}%");
+
+			Tools.ShowNotification("title", "subtitle", $"You're battery is at {level}%");
+
+			// Also update image
+			UpdateBatteryImage();
 		}
 
 		private void UpdateBatteryImage()
