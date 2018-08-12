@@ -1,5 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 using BatteryNotifier.iOS;
+using UIKit;
 using UserNotifications;
 using Xamarin.Forms;
 
@@ -8,6 +12,10 @@ namespace BatteryNotifier
 	public partial class MainPage
 	{
 		private readonly Battery battery;
+
+		private readonly bool lowEnabled, highEnabled;
+
+		private readonly int lowValue, highValue;
 
 		public MainPage()
 		{
@@ -25,11 +33,11 @@ namespace BatteryNotifier
 			FrameControls.BackgroundColor = Color.FromRgba(0.9, 0.9, 0.9, 0.7);
 
 			// Set default settings
-			var lowEnabled  = Preferences.Get("lowEnabled",  true);
-			var highEnabled = Preferences.Get("highEnabled", true);
+			lowEnabled  = Preferences.Get("lowEnabled",  true);
+			highEnabled = Preferences.Get("highEnabled", true);
 
-			var lowValue  = Preferences.Get("lowValue",  50);
-			var highValue = Preferences.Get("highValue", 60);
+			lowValue  = Preferences.Get("lowValue",  50);
+			highValue = Preferences.Get("highValue", 60);
 
 			SwitchLow.IsToggled  = lowEnabled;
 			SwitchHigh.IsToggled = highEnabled;
@@ -56,6 +64,21 @@ namespace BatteryNotifier
 				LabelHighPercent.Text = $"{p}%";
 				Preferences.Set("highValue", p);
 			};
+			
+			/*
+			 * TODO
+			 * This is a VERY temporary workaround
+			 * for forcing the app to always be
+			 * running. Remake this with proper
+			 * backgrounding at some point.
+			 */
+			Task.Run(() =>
+			{
+				UIApplication.SharedApplication.BeginBackgroundTask(() => { });
+
+				while (true)
+					Thread.Sleep(TimeSpan.FromMinutes(5));
+			});
 		}
 
 		protected override void OnAppearing()
@@ -76,7 +99,10 @@ namespace BatteryNotifier
 
 			Debug.WriteLine($"UpdateBatteryStatus: {level}%");
 
-			Tools.ShowNotification("title", "subtitle", $"Battery is at {level}%");
+			if (lowEnabled && level == lowValue)
+				Tools.ShowNotification("Battery Discharged", "", $"Battery is at {level}%");
+			else if (highEnabled && level == highValue)
+				Tools.ShowNotification("Battery Charged", "", $"Battery is at {level}%");
 
 			// Also update image
 			UpdateBatteryImage();
