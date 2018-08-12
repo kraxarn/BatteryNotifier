@@ -65,6 +65,9 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <LangVersion>7.1</LangVersion>
+    <CodesignProvision />
+    <BuildIpa>true</BuildIpa>
+    <IpaPackageName>com.crow.batterynotifier</IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
