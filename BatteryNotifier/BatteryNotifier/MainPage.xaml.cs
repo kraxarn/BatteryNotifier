@@ -76,7 +76,7 @@ namespace BatteryNotifier
 
 			Debug.WriteLine($"UpdateBatteryStatus: {level}%");
 
-			Tools.ShowNotification("title", "subtitle", $"You're battery is at {level}%");
+			Tools.ShowNotification("title", "subtitle", $"Battery is at {level}%");
 
 			// Also update image
 			UpdateBatteryImage();
