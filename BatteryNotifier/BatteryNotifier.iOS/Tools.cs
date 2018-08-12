@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Foundation;
 using UIKit;
 using UserNotifications;
@@ -26,25 +27,17 @@ namespace BatteryNotifier.iOS
 				NSRunLoop.Main.BeginInvokeOnMainThread(Show);
 		}
 
-		public static void ShowNotification(string title, string subtitle, string body)
+		public static void ShowNotification(string title, string body)
 		{
-			var content = new UNMutableNotificationContent
+			var notif = new UILocalNotification
 			{
-				Title = title,
-				Subtitle = subtitle,
-				Body = body
+				FireDate = NSDate.Now,
+				AlertTitle = title,
+				AlertBody = body,
+				SoundName = UILocalNotification.DefaultSoundName
 			};
 
-			var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(5, false);
-			var request = UNNotificationRequest.FromIdentifier("batteryRequest", content, trigger);
-
-			UNUserNotificationCenter.Current.AddNotificationRequest(request, err =>
-			{
-				if (err != null)
-					Debug.WriteLine($"NotifError: {err.LocalizedDescription}");
-				else
-					Debug.WriteLine("NotifOk");
-			});
+			UIApplication.SharedApplication.ScheduleLocalNotification(notif);
 		}
 	}
 }

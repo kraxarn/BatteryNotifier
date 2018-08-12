@@ -98,11 +98,11 @@ namespace BatteryNotifier
 			var level = battery.Level;
 
 			Debug.WriteLine($"UpdateBatteryStatus: {level}%");
-
+			
 			if (lowEnabled && level == lowValue)
-				Tools.ShowNotification("Battery Discharged", "", $"Battery is at {level}%");
+				Tools.ShowNotification("Battery Discharged", $"Battery is at {level}%");
 			else if (highEnabled && level == highValue)
-				Tools.ShowNotification("Battery Charged", "", $"Battery is at {level}%");
+				Tools.ShowNotification("Battery Charged", $"Battery is at {level}%");
 
 			// Also update image
 			UpdateBatteryImage();
