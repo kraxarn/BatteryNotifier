@@ -17,7 +17,7 @@ namespace BatteryNotifier.iOS
 
 		public BatteryLevelEvent OnLevel;
 
-		public int Level => (int)(UIDevice.CurrentDevice.BatteryLevel * 100);
+		public int Level => (int) Math.Round(UIDevice.CurrentDevice.BatteryLevel * 100);
 
 		public bool IsCharging
 		{
