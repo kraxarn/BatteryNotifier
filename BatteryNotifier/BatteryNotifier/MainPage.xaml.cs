@@ -77,7 +77,7 @@ namespace BatteryNotifier
 				UIApplication.SharedApplication.BeginBackgroundTask(() => { });
 
 				while (true)
-					Thread.Sleep(TimeSpan.FromMinutes(5));
+					Thread.Sleep(5000);
 			});
 		}
 
