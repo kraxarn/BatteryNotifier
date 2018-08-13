@@ -15,7 +15,7 @@ namespace BatteryNotifier
 
 		private readonly bool lowEnabled, highEnabled;
 
-		private readonly int lowValue, highValue;
+		private int lowValue, highValue;
 
 		public MainPage()
 		{
@@ -57,12 +57,14 @@ namespace BatteryNotifier
 				var p = (int) args.NewValue * 5;
 				LabelLowPercent.Text  = $"{p}%";
 				Preferences.Set("lowValue", p);
+				lowValue = p;
 			};
 			SliderHighPercent.ValueChanged += (sender, args) =>
 			{
 				var p = (int) args.NewValue * 5;
 				LabelHighPercent.Text = $"{p}%";
 				Preferences.Set("highValue", p);
+				highValue = p;
 			};
 			
 			/*
