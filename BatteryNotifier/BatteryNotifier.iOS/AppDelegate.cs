@@ -1,4 +1,6 @@
-﻿using Foundation;
+﻿using System;
+using System.Diagnostics;
+using Foundation;
 using UIKit;
 
 namespace BatteryNotifier.iOS
@@ -21,7 +23,23 @@ namespace BatteryNotifier.iOS
             Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
-            return base.FinishedLaunching(app, options);
+			UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(60);
+
+	        return true;
+	        //return base.FinishedLaunching(app, options);
         }
+
+	    public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
+	    {
+			Debug.WriteLine("Fetching...");
+			Console.WriteLine("Fetching...");
+
+			// Check for new data
+			Tools.ShowNotification("Title", "Body");
+
+			// Inform system of fetched results
+		    completionHandler(UIBackgroundFetchResult.NewData);
+		    //base.PerformFetch(application, completionHandler);
+	    }
     }
 }
